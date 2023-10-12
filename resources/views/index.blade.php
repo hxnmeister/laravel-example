@@ -1,7 +1,12 @@
 @extends('templates.main')
 @section('content')
     <h1>{{$title}}</h1>
-    <h2>{!!$subtitle!!}</h2>
+
+    @foreach ($allCategories as $category)
+        <p>{{$category->name}}, {{$category->description}}</p>
+    @endforeach
+
+    {{-- <h2>{!!$subtitle!!}</h2>
 
     @if(strlen($title) > 5)
         Hello!
@@ -23,5 +28,5 @@
     @php
         $a = 10;
         echo $a;
-    @endphp
+    @endphp --}}
 @endsection
