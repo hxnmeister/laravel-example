@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
 
+    use App\Models\Article;
     use App\Models\Category;
     use Illuminate\Http\RedirectResponse;
     use Illuminate\Http\Request;
@@ -9,8 +10,14 @@
 
     class MainController extends Controller
     {
-        function index(): View
+        function index()//: View
         {
+            /** @var Article $article */
+            
+            // $article = Article::first();
+            // dd($article->published_at->format('H:i')); маніпулювання через casts див. модель Article
+            // dd($article->getAttribute('active'));
+            
             // $category = new Category();
 
             // $category->name = 'Category 4';
@@ -18,16 +25,15 @@
             // $category->save();
             // dd($category->id);
 
-            $allCategories = Category::all();
+            // $allCategories = Category::all();
             // dd($allCategories);
 
-            $title = 'Main Page';
             // $subtitle = '<em>Subtitle</em>';
             // $users = ['Tom', 'Bill', 'Mike'];
 
             // return view('index', compact('title', 'subtitle', 'users'));
 
-            return view('index', compact('title', 'allCategories'));
+            // return view('index', compact('allCategories'));
         }
 
         function contacts(): View
