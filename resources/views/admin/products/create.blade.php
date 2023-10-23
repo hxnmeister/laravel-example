@@ -1,5 +1,5 @@
 @extends('admin.templates.index')
-@section('page-title', 'Creating Category')
+@section('page-title', 'Creating Product')
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -10,11 +10,8 @@
             </ul>
         </div>
     @endif
-    
+
     {!! Form::open(['route' => 'categories.store']) !!}
-
-        @include('admin.categories._form')
-
-        {!! Form::submit('Add Category', ['class' => 'btn btn-primary mt-3']) !!}
+        {!! !!}
     {!! Form::close() !!}
 @endsection
