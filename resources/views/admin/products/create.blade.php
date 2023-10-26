@@ -10,8 +10,10 @@
             </ul>
         </div>
     @endif
+    
+    {!! Form::open(['route' => 'products.store', 'files' => true]) !!}
+        @include('admin.products._form')
 
-    {!! Form::open(['route' => 'categories.store']) !!}
-        {!! !!}
+        {!! Form::submit('Add Product', ['class' => 'btn btn-primary mt-3']) !!}
     {!! Form::close() !!}
 @endsection

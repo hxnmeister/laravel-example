@@ -3,68 +3,70 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $products = Product::join('categories', 'products.category_id', '=', 'categories.id')->select('products.*', 'categories.name as category_name')->paginate(3);
+        // $products = Product::join('categories', 'products.category_id', '=', 'categories.id')->select('products.*', 'categories.name as category_name')->paginate(3);
+        $products = Product::all();
 
         return view('admin.products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('admin.products.create');
+        $categories = Category::all()->pluck('name', 'id');
+
+        return view('admin.products.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $createdProduct = Product::create($request->all());
+
+        if($request->image)
+        {
+            $createdProduct->image = $request->file('image')->store('uploads'); //повертається шлях до зображення
+            $createdProduct->save();
+        }
+
+        return to_route('products.index')->with('success', 'Product successfully edited!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        $categories = Category::all()->pluck('name', 'id');
+
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        
+        if($request->image)
+        {
+            $product->image = $request->file('image')->store('uploads');
+            $product->update();
+        }
+
+        return to_route('products.index')->with('success', 'Product successfully edited!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
         $product->delete();
 
-        return to_route('products.index')->with('success', 'Category successflly edited!');
+        return to_route('products.index')->with('success', 'Product successfully deleted!');
     }
 }

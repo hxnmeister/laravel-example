@@ -7,7 +7,7 @@
         </div>
     @endif
 
-    <a href="{{route('products.create')}}" class="btn btn-primary mb-5">Create New Category</a>
+    <a href="{{route('products.create')}}" class="btn btn-primary mb-5">Create New Product</a>
         
     <table class="table table-bordered">
         <thead>
@@ -23,12 +23,13 @@
             @foreach ($products as $product)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$product->image}}</td>
+                    <td><img src="{{asset('storage/'.$product->image)}}" alt="" style="width: 50px; height: 50px"></td>
                     <td>{{$product->name}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->quantity}}</td>
-                    <td>{{$product->category_name}}</td>
+                    <td>{{$product->category->name}}</td>
                     <td>
+                        <a href="{{route('products.edit', ['product' => $product->id])}}" class="btn btn-warning">Edit</a>
                         {!! Form::open(['route' => ['products.destroy', $product->id], 'method' => 'delete']) !!}
                             <button class="btn btn-danger">Delete</button>
                         {!! Form::close() !!}

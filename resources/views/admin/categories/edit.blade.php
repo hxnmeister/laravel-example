@@ -12,7 +12,6 @@
     @endif
     
     {!! Form::model($category, ['route' => ['categories.update', $category->id], 'method' => 'put']) !!}
-
         @include('admin.categories._form')
 
         {!! Form::submit('Confirm Edit', ['class' => 'btn btn-primary mt-3']) !!}
