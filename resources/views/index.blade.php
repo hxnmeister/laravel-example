@@ -1,6 +1,6 @@
 @extends('templates.main')
 @section('content')
-    <h1>{{$title}}</h1>
+    <h1>Home</h1>
 
     @foreach ($allCategories as $category)
         <p>{{$category->name}}, {{$category->description}}</p>

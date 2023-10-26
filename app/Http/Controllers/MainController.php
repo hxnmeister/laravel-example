@@ -25,7 +25,7 @@
             // $category->save();
             // dd($category->id);
 
-            // $allCategories = Category::all();
+            $allCategories = Category::all();
             // dd($allCategories);
 
             // $subtitle = '<em>Subtitle</em>';
@@ -33,7 +33,7 @@
 
             // return view('index', compact('title', 'subtitle', 'users'));
 
-            // return view('index', compact('allCategories'));
+            return view('index', compact('allCategories'));
         }
 
         function contacts(): View
