@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('price');
             $table->smallInteger('quantity');
             $table->string('image')->nullable();
+            $table->string('slug');
 
             // $table->bigInteger('category_id', true, true)->nullable();
             // $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
