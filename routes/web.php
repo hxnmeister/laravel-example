@@ -21,6 +21,7 @@
 
     Route::get('/', [MainController::class, 'index'])->name('home');
     Route::get('contacts', [MainController::class, 'contacts'])->name('contacts');
+    Route::get('products/{slug}', [MainController::class, 'showProduct'])->name('showProduct');
     Route::post('contacts', [MainController::class, 'sendEmail'])->name('sendEmail');
 
     Route::prefix('admin')->group(function()
@@ -34,3 +35,5 @@
     // {
     //     dd($category);
     // });
+Auth::routes();
+

@@ -1,10 +1,24 @@
-@extends('templates.main')
+@extends('layouts.app')
 @section('content')
-    <h1>Home</h1>
+    <div class="container">
+        <h1>Home</h1>
+    </div>
 
-    @foreach ($allCategories as $category)
+    <div class="container d-flex">
+        @foreach ($products as $product)
+            <div class="container d-flex flex-column mb-5">
+                <img src="{{$product->image}}" alt="Image of {{$product->slug}}" style="width: 200px; height: 150px" class="mb-2">
+                <div class="d-grid gap-2 d-md-block">
+                    <a href="{{route('showProduct', ['slug' => $product->slug])}}" class="btn btn-outline-info">{{$product->name}}</a>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    
+
+    {{-- @foreach ($allCategories as $category)
         <p>{{$category->name}}, {{$category->description}}</p>
-    @endforeach
+    @endforeach --}}
 
     {{-- <h2>{!!$subtitle!!}</h2>
 

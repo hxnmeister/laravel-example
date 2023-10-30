@@ -4,16 +4,20 @@
 
     use App\Models\Article;
     use App\Models\Category;
-    use Illuminate\Http\RedirectResponse;
+use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
     use Illuminate\Http\Request;
     use Illuminate\View\View;
 
     class MainController extends Controller
     {
-        function index()//: View
+        function index(): View
         {
             /** @var Article $article */
-            
+
+            $products = Product::orderBy('created_at', 'desc')->take(4)->get();
+
+            return view('index', compact('products'));
             // $article = Article::first();
             // dd($article->published_at->format('H:i')); маніпулювання через casts див. модель Article
             // dd($article->getAttribute('active'));
@@ -25,7 +29,7 @@
             // $category->save();
             // dd($category->id);
 
-            $allCategories = Category::all();
+            // $allCategories = Category::all();
             // dd($allCategories);
 
             // $subtitle = '<em>Subtitle</em>';
@@ -33,7 +37,7 @@
 
             // return view('index', compact('title', 'subtitle', 'users'));
 
-            return view('index', compact('allCategories'));
+            // return view('index', compact('allCategories'));
         }
 
         function contacts(): View
@@ -61,5 +65,12 @@
             // return redirect()->route('contacts')->with('success', 'Thank you!'); по назві маршрута
             //return to_route('contacts')->with('success', 'Thank you!'); по назві маршрута
             return redirect()->back()->with('success', 'Thank you!'); // повернення на попередню сторінку
+        }
+
+        function showProduct($slug)
+        {
+            $product = Product::where('slug', $slug)->first();
+
+            return view('product', compact('product'));
         }
     }
